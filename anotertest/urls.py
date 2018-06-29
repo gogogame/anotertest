@@ -2,5 +2,5 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('food/', include('food.urls')),
+    path('', include('food.urls')),
 ]
