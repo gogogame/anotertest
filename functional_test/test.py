@@ -49,12 +49,13 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys("50")
 
         inputbox.send_keys(Keys.ENTER)
+        time.sleep(3)
 
         # He make sure that is included in the table
         food = self.browser.find_element_by_id('id_food_list')
         sugar = food.find_elements_by_tag_name('tr')
-        self.assertIn('Baked corn snack', food.name)
-        self.assertIn('50%', food.sugar)
+        self.assertIn('Baked corn snack', str([sugar.text for sugar in sugar]))
+        self.assertIn('50%', str([sugar.text for sugar in sugar]))
 
         # Then he finds some of the food that list as 100% sugar
         # Which is stupid, so he removes it
@@ -62,12 +63,12 @@ class NewVisitorTest(LiveServerTestCase):
         sugar = food.find_elements_by_tag_name('tr')
         self.assertIn('Brown sugar', str([sugar.text for sugar in sugar]))
         self.assertIn('100%', str([sugar.text for sugar in sugar]))
-        
+
         button = food.find_element_by_id('id_delete')
         button.click()
 
         # Again he makes sure this thing doesn't exist anymore in table
         food = self.browser.find_element_by_id('id_food_list')
         sugar = food.find_elements_by_tag_name('tr')
-        self.assertNotIn('Brown sugar', food.name)
-        self.assertNotIn('100%', food.sugar)
+        self.assertNotIn('Brown sugar', str([sugar.text for sugar in sugar]))
+        self.assertNotIn('100%', str([sugar.text for sugar in sugar]))

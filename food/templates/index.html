@@ -7,14 +7,18 @@
         <input id="id_add_food" placeholder="Enter food name." />
         <input id="id_add_sugar" placeholder="Enter sugar amount. (eg. 10%)" />
         {% csrf_token %}
+        <input type='submit' id='id_send' value='Send' />
       </form>
 
       <table id="id_food_list">
         <tr>
           <th>Plain milk</th>
+          <th>{{ food.name }}</th>
         </tr>
+
         <tr>
-          <th>18%</th>
+          <td>18%</td>
+          <td>{{ food.sugar }}</td>
         </tr>
       </table>
     </body>
