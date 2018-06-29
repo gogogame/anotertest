@@ -1,4 +1,21 @@
 <html>
     <title>FoodSugar</title>
     <h1>FoodSugar</h1>
+
+    <body>
+      <form method="POST">
+        <input id="id_add_food" placeholder="Enter food name." />
+        <input id="id_add_sugar" placeholder="Enter sugar amount. (eg. 10%)" />
+        {% csrf_token %}
+      </form>
+
+      <table id="id_food_list">
+        <tr>
+          <th>Plain milk</th>
+        </tr>
+        <tr>
+          <th>18%</th>
+        </tr>
+      </table>
+    </body>
 </html>

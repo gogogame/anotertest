@@ -29,8 +29,8 @@ class NewVisitorTest(LiveServerTestCase):
         # Then he saw the amount of sugar of plain milk
         food = self.browser.find_element_by_id('id_food_list')
         sugar = food.find_elements_by_tag_name('tr')
-        self.assertIn('Plain milk', food.name)
-        self.assertIn('18%', food.sugar)
+        self.assertIn('Plain milk', str([sugar.text for sugar in sugar]))
+        self.assertIn('18%',str([sugar.text for sugar in sugar]))
 
         # After that he proceed to add the new food data
         # He'd add the "Baked corn snack" "50%" sugar (that's hell lot)
@@ -48,8 +48,7 @@ class NewVisitorTest(LiveServerTestCase):
         )
         inputbox.send_keys("50")
 
-        button = inputbox.find_element_by_id('id_submit')
-        button.click()
+        inputbox.send_keys(Keys.ENTER)
 
         # He make sure that is included in the table
         food = self.browser.find_element_by_id('id_food_list')
@@ -61,9 +60,9 @@ class NewVisitorTest(LiveServerTestCase):
         # Which is stupid, so he removes it
         food = self.browser.find_element_by_id('id_food_list')
         sugar = food.find_elements_by_tag_name('tr')
-        self.assertIn('Brown sugar', food.name)
-        self.assertIn('100%', food.sugar)
-
+        self.assertIn('Brown sugar', str([sugar.text for sugar in sugar]))
+        self.assertIn('100%', str([sugar.text for sugar in sugar]))
+        
         button = food.find_element_by_id('id_delete')
         button.click()
 
